@@ -1,7 +1,8 @@
----
 - name: "Nextcloud download: create temporary download directory"
   ansible.builtin.file:
     name: "{{ nextcloud_dl_tmp_dir }}"
+    owner: root
+    group: root
     state: directory
     mode: 0755
 
@@ -10,6 +11,7 @@
     repo: "{{ nextcloud_repo }}"
     dest: "{{ nextcloud_dl_tmp_dir }}/nextcloud"
     version: "v{{ nextcloud_version }}"
+    depth: 1
   when: nextcloud_src_type == "git"
 
 - name: "Nextcloud download: Download Nextcloud archive"
